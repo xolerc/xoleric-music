@@ -104,8 +104,10 @@ fun XolericNavigation(navController: NavHostController) {
         composable(
             route = Screen.AlbumDetail.route,
             arguments = listOf(navArgument("albumId") { type = NavType.LongType })
-        ) {
+        ) { backStackEntry ->
+            val albumId = backStackEntry.arguments?.getLong("albumId") ?: 0L
             AlbumDetailScreen(
+                albumId = albumId,
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToPlayer = { navController.navigate(Screen.Player.route) }
             )
@@ -121,8 +123,10 @@ fun XolericNavigation(navController: NavHostController) {
         composable(
             route = Screen.ArtistDetail.route,
             arguments = listOf(navArgument("artistId") { type = NavType.LongType })
-        ) {
+        ) { backStackEntry ->
+            val artistId = backStackEntry.arguments?.getLong("artistId") ?: 0L
             ArtistDetailScreen(
+                artistId = artistId,
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToPlayer = { navController.navigate(Screen.Player.route) }
             )
@@ -157,8 +161,10 @@ fun XolericNavigation(navController: NavHostController) {
         composable(
             route = Screen.GenreDetail.route,
             arguments = listOf(navArgument("genreId") { type = NavType.LongType })
-        ) {
+        ) { backStackEntry ->
+            val genreId = backStackEntry.arguments?.getLong("genreId") ?: 0L
             GenreDetailScreen(
+                genreId = genreId,
                 onNavigateBack = { navController.popBackStack() },
                 onNavigateToPlayer = { navController.navigate(Screen.Player.route) }
             )

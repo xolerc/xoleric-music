@@ -65,6 +65,9 @@ fun HomeScreen(
     val recentlyAdded by viewModel.recentlyAdded.collectAsStateWithLifecycle()
     val mostPlayed by viewModel.mostPlayed.collectAsStateWithLifecycle()
     val albums by viewModel.albums.collectAsStateWithLifecycle()
+    val artists by viewModel.artists.collectAsStateWithLifecycle()
+    val folders by viewModel.folders.collectAsStateWithLifecycle()
+    val genres by viewModel.genres.collectAsStateWithLifecycle()
     val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
 
     val greeting = when (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
@@ -208,14 +211,14 @@ fun HomeScreen(
                 LibraryQuickItem(
                     icon = Icons.Filled.MusicNote,
                     label = "Artists",
-                    count = 0,
+                    count = artists.size,
                     modifier = Modifier.weight(1f),
                     onClick = { onNavigateToSection(Screen.Artists.route) }
                 )
                 LibraryQuickItem(
                     icon = Icons.Filled.Folder,
                     label = "Folders",
-                    count = 0,
+                    count = folders.size,
                     modifier = Modifier.weight(1f),
                     onClick = { onNavigateToSection(Screen.Folders.route) }
                 )
@@ -236,14 +239,14 @@ fun HomeScreen(
                 LibraryQuickItem(
                     icon = Icons.Filled.QueueMusic,
                     label = "Playlists",
-                    count = 0,
+                    count = genres.size,
                     modifier = Modifier.weight(1f),
                     onClick = { onNavigateToSection(Screen.Playlists.route) }
                 )
                 LibraryQuickItem(
                     icon = Icons.Filled.MusicNote,
                     label = "Genres",
-                    count = 0,
+                    count = genres.size,
                     modifier = Modifier.weight(1f),
                     onClick = { onNavigateToSection(Screen.Genres.route) }
                 )

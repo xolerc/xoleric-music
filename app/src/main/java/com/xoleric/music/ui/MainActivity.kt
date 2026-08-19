@@ -34,8 +34,8 @@ import com.xoleric.music.core.ui.theme.XolericTheme
 import com.xoleric.music.ui.navigation.BottomNavBar
 import com.xoleric.music.ui.navigation.Screen
 import com.xoleric.music.ui.navigation.XolericNavigation
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -63,7 +63,9 @@ class MainActivity : ComponentActivity() {
         if (hasPermission) startScan()
 
         setContent {
-            XolericTheme {
+            val container = (application as XolericApp).container
+            val accentName by container.settingsRepository.accentName.collectAsStateWithLifecycle(initialValue = "cyan")
+            XolericTheme(accentName = accentName) {
                 XolericApp(hasPermission, isScanning, scanComplete) {
                     permissionLauncher.launch(permission)
                 }
@@ -74,7 +76,7 @@ class MainActivity : ComponentActivity() {
     private fun startScan() {
         isScanning = true
         val container = (application as XolericApp).container
-        CoroutineScope(Dispatchers.IO).launch {
+        lifecycleScope.launch {
             container.musicRepository.scanAndSync()
             isScanning = false
             scanComplete = true

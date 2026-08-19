@@ -35,14 +35,10 @@ class PlaybackManager constructor(
     val sleepTimerState: StateFlow<SleepTimerState> = _sleepTimerState.asStateFlow()
 
     private var exoPlayer: ExoPlayer? = null
-    private var mediaSession: androidx.media3.session.MediaSession? = null
     private var originalQueue: List<Song> = emptyList()
 
     val player: ExoPlayer?
         get() = exoPlayer
-
-    val session: androidx.media3.session.MediaSession?
-        get() = mediaSession
 
     fun initialize() {
         if (exoPlayer != null) return
@@ -50,8 +46,6 @@ class PlaybackManager constructor(
         exoPlayer = ExoPlayer.Builder(context).build().apply {
             addListener(playerListener)
         }
-
-        mediaSession = androidx.media3.session.MediaSession.Builder(context, exoPlayer!!).build()
 
         startPositionTracker()
     }
@@ -61,8 +55,6 @@ class PlaybackManager constructor(
         sleepTimerJob?.cancel()
         exoPlayer?.release()
         exoPlayer = null
-        mediaSession?.release()
-        mediaSession = null
     }
 
     private fun startPositionTracker() {
@@ -125,6 +117,13 @@ class PlaybackManager constructor(
     }
 
     private fun handleTrackEnd() {
+        val sleepState = _sleepTimerState.value
+        if (sleepState.isActive && sleepState.endOfSong) {
+            pause()
+            _sleepTimerState.update { SleepTimerState() }
+            return
+        }
+
         val state = _playbackState.value
         when (state.repeatMode) {
             RepeatMode.ONE -> {

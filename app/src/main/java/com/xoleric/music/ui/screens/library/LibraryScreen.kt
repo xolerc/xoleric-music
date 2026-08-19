@@ -62,14 +62,18 @@ fun LibraryScreen(
 ) {
     val songCount by viewModel.songCount.collectAsStateWithLifecycle()
     val favoriteCount by viewModel.favoriteCount.collectAsStateWithLifecycle()
+    val albumCount by viewModel.albumCount.collectAsStateWithLifecycle()
+    val artistCount by viewModel.artistCount.collectAsStateWithLifecycle()
+    val folderCount by viewModel.folderCount.collectAsStateWithLifecycle()
+    val genreCount by viewModel.genreCount.collectAsStateWithLifecycle()
 
     val items = listOf(
         LibraryItem(Icons.Filled.MusicNote, "Songs", songCount, "songs"),
-        LibraryItem(Icons.Filled.Album, "Albums", 0, "albums"),
-        LibraryItem(Icons.Filled.MusicNote, "Artists", 0, "artists"),
-        LibraryItem(Icons.Filled.Folder, "Folders", 0, "folders"),
+        LibraryItem(Icons.Filled.Album, "Albums", albumCount, "albums"),
+        LibraryItem(Icons.Filled.MusicNote, "Artists", artistCount, "artists"),
+        LibraryItem(Icons.Filled.Folder, "Folders", folderCount, "folders"),
         LibraryItem(Icons.Filled.QueueMusic, "Playlists", 0, "playlists"),
-        LibraryItem(Icons.Filled.MusicNote, "Genres", 0, "genres"),
+        LibraryItem(Icons.Filled.MusicNote, "Genres", genreCount, "genres"),
         LibraryItem(Icons.Filled.Favorite, "Favorites", favoriteCount, "favorites"),
         LibraryItem(Icons.Filled.History, "Recently Played", 0, "recently_played"),
         LibraryItem(Icons.Filled.TrendingUp, "Most Played", 0, "most_played")
