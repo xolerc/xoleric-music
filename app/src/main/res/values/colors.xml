@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="xoleric_black">#FF0A0A0A</color>
+    <color name="xoleric_graphite">#FF1A1A2E</color>
+    <color name="xoleric_charcoal">#FF16213E</color>
+    <color name="xoleric_surface">#FF1E1E30</color>
+    <color name="xoleric_surface_variant">#FF2A2A40</color>
+    <color name="xoleric_neon_cyan">#FF00E5FF</color>
+    <color name="xoleric_neon_blue">#FF2979FF</color>
+    <color name="xoleric_neon_violet">#FF7C4DFF</color>
+    <color name="xoleric_neon_magenta">#FFE040FB</color>
+    <color name="xoleric_text_primary">#FFFFFFFF</color>
+    <color name="xoleric_text_secondary">#B3FFFFFF</color>
+    <color name="xoleric_text_tertiary">#66FFFFFF</color>
+    <color name="xoleric_divider">#1AFFFFFF</color>
+    <color name="xoleric_glass">#14FFFFFF</color>
+    <color name="xoleric_glass_border">#1AFFFFFF</color>
+    <color name="xoleric_error">#FFFF5252</color>
+    <color name="xoleric_success">#FF69F0AE</color>
+</resources>
