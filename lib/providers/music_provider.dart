@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../models/song.dart';
-import '../../services/music_library_service.dart';
+import '../models/song.dart';
+import '../services/music_library_service.dart';
 
 class MusicProvider extends ChangeNotifier {
   final MusicLibraryService _service = MusicLibraryService();
@@ -21,13 +21,22 @@ class MusicProvider extends ChangeNotifier {
     try {
       await _service.scanSongs();
       _songs = _service.songs;
+      _error = '';
     } catch (e) {
-      _error = e.toString();
+      debugPrint('MusicProvider error: $e');
+      _error = 'Failed to load music.\nCheck permissions and try again.';
+      _songs = [];
     }
 
     _loading = false;
     notifyListeners();
   }
 
-  List<SongModel> search(String query) => _service.search(query);
+  List<SongModel> search(String query) {
+    try {
+      return _service.search(query);
+    } catch (e) {
+      return [];
+    }
+  }
 }

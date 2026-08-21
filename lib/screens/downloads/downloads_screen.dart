@@ -1,112 +1,56 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../../providers/download_provider.dart';
-import '../../services/download_service.dart';
-import '../../utils/colors.dart';
-import '../../widgets/empty_state.dart';
+import '../../providers/theme_provider.dart';
 
 class DownloadsScreen extends StatelessWidget {
   const DownloadsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final downloads = context.watch<DownloadProvider>();
+    final t = context.watch<ThemeProvider>().current;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Downloads'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.language),
-            onPressed: () => context.push('/browser'),
-          ),
-        ],
-      ),
-      body: downloads.queue.isEmpty
-          ? EmptyState(
-              icon: Icons.download,
-              message: 'No downloads yet.\nUse the browser to find and download files.',
-              actionLabel: 'Open Browser',
-              onAction: () => context.push('/browser'),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.only(bottom: 80),
-              itemCount: downloads.queue.length,
-              itemBuilder: (ctx, i) {
-                final item = downloads.queue[i];
-                return _DownloadTile(item: item, downloads: downloads);
-              },
-            ),
-    );
-  }
-}
-
-class _DownloadTile extends StatelessWidget {
-  final DownloadItem item;
-  final DownloadProvider downloads;
-
-  const _DownloadTile({required this.item, required this.downloads});
-
-  IconData _icon() {
-    switch (item.fileType) {
-      case 'music': return Icons.music_note;
-      case 'video': return Icons.video_file;
-      case 'image': return Icons.image;
-      default: return Icons.file_download;
-    }
-  }
-
-  Color _statusColor() {
-    switch (item.status) {
-      case DownloadStatus.downloading: return XolericColors.neonCyan;
-      case DownloadStatus.completed: return XolericColors.success;
-      case DownloadStatus.failed: return XolericColors.error;
-      case DownloadStatus.paused: return XolericColors.neonBlue;
-      case DownloadStatus.cancelled: return XolericColors.textTertiary;
-      default: return XolericColors.textTertiary;
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Container(
-        width: 44, height: 44,
-        decoration: BoxDecoration(color: XolericColors.surfaceVariant, borderRadius: BorderRadius.circular(8)),
-        child: Icon(_icon(), color: _statusColor(), size: 22),
-      ),
-      title: Text(item.fileName, maxLines: 1, overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: XolericColors.textPrimary)),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (item.status == DownloadStatus.downloading)
+      backgroundColor: t.background,
+      body: SafeArea(
+        child: Column(
+          children: [
             Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: LinearProgressIndicator(value: item.progress, backgroundColor: XolericColors.surfaceVariant, color: XolericColors.neonCyan, minHeight: 3),
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 8),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: t.accent.withAlpha(30),
+                      borderRadius: BorderRadius.circular(t.buttonRadius)),
+                    child: Icon(Icons.download_rounded, color: t.accent, size: 24),
+                  ),
+                  const SizedBox(width: 12),
+                  Text('Downloads', style: TextStyle(
+                    color: t.textPrimary, fontSize: 22, fontWeight: FontWeight.bold)),
+                ],
+              ),
             ),
-          Text('${item.status.name} - ${item.sizeText}/${item.totalSizeText}',
-              style: TextStyle(color: _statusColor(), fontSize: 12)),
-        ],
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.cloud_download_outlined, size: 64,
+                      color: t.textTertiary.withAlpha(100)),
+                    const SizedBox(height: 16),
+                    Text('No downloads yet', style: TextStyle(
+                      color: t.textSecondary, fontSize: 16)),
+                    const SizedBox(height: 8),
+                    Text('Download songs from URLs', style: TextStyle(
+                      color: t.textTertiary, fontSize: 13)),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      trailing: _actions(),
     );
-  }
-
-  Widget? _actions() {
-    switch (item.status) {
-      case DownloadStatus.downloading:
-        return Row(mainAxisSize: MainAxisSize.min, children: [
-          IconButton(icon: const Icon(Icons.pause, size: 20), onPressed: () => downloads.pause(item.id)),
-          IconButton(icon: const Icon(Icons.close, size: 20), onPressed: () => downloads.cancel(item.id)),
-        ]);
-      case DownloadStatus.paused:
-        return IconButton(icon: const Icon(Icons.play_arrow, size: 20), onPressed: () => downloads.resume(item.id));
-      case DownloadStatus.failed:
-        return IconButton(icon: const Icon(Icons.refresh, size: 20), onPressed: () => downloads.retry(item.id));
-      default:
-        return null;
-    }
   }
 }

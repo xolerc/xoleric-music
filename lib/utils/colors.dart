@@ -26,13 +26,4 @@ class XolericColors {
 
   static const miniPlayerBg = Color(0xE61A1A2E);
   static const bottomNavBg = Color(0xE60A0A0A);
-
-  static Color fromAccentName(String name) {
-    switch (name) {
-      case 'blue': return neonBlue;
-      case 'violet': return neonViolet;
-      case 'magenta': return neonMagenta;
-      default: return neonCyan;
-    }
-  }
 }
