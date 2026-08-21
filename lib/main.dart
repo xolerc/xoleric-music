@@ -17,7 +17,11 @@ void main() async {
     systemNavigationBarIconBrightness: Brightness.light,
   ));
 
-  await initAudioService();
+  try {
+    await initAudioService();
+  } catch (e) {
+    debugPrint('Audio service init failed: $e');
+  }
 
   runApp(
     MultiProvider(

@@ -171,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
             subtitle: Text(song.artist, maxLines: 1, overflow: TextOverflow.ellipsis,
               style: TextStyle(color: t.textTertiary, fontSize: 13)),
             trailing: Text(song.durationText, style: TextStyle(color: t.textTertiary, fontSize: 12)),
-            onTap: () => player.playSong(song, queue: music.songs),
+            onTap: () => player.playSong(song, queueList: music.songs),
           ),
         );
       },
