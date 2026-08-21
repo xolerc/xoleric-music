@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>XOLERIC - Premium Music Player for Android</title>
+    <title>XOLERIC - Music Player & Download Manager for Android</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -27,10 +27,8 @@
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: radial-gradient(circle at 30% 50%, rgba(0,229,255,0.05) 0%, transparent 50%),
                         radial-gradient(circle at 70% 50%, rgba(124,77,255,0.05) 0%, transparent 50%);
             animation: float 20s ease-in-out infinite;
@@ -49,16 +47,8 @@
             background-clip: text;
             margin-bottom: 1rem;
         }
-        .tagline {
-            font-size: 1.5rem;
-            color: #B3FFFFFF;
-            margin-bottom: 0.5rem;
-        }
-        .subtitle {
-            font-size: 1.1rem;
-            color: #66FFFFFF;
-            margin-bottom: 2rem;
-        }
+        .tagline { font-size: 1.5rem; color: #B3FFFFFF; margin-bottom: 0.5rem; }
+        .subtitle { font-size: 1.1rem; color: #66FFFFFF; margin-bottom: 2rem; }
         .download-btn {
             display: inline-block;
             padding: 16px 48px;
@@ -78,15 +68,23 @@
         .version {
             display: block;
             font-size: 0.85rem;
-            color: #66FFFFFF;
-            margin-top: 0.75rem;
-            font-weight: 400;
+            color: #0A0A0A;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            opacity: 0.7;
         }
-        .features {
-            padding: 5rem 2rem;
-            max-width: 1100px;
-            margin: 0 auto;
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(124,77,255,0.2);
+            color: #B388FF;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            border: 1px solid rgba(124,77,255,0.3);
         }
+        .features { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
         .section-title {
             font-size: 2rem;
             font-weight: 700;
@@ -114,23 +112,10 @@
             transform: translateY(-4px);
             box-shadow: 0 8px 32px rgba(0,229,255,0.1);
         }
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-        .feature-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: #FFFFFF;
-        }
-        .feature-card p {
-            font-size: 0.95rem;
-            color: #B3FFFFFF;
-        }
-        .tech-section {
-            padding: 5rem 2rem;
-            background: rgba(26,26,46,0.5);
-        }
+        .feature-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .feature-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; color: #FFFFFF; }
+        .feature-card p { font-size: 0.95rem; color: #B3FFFFFF; }
+        .tech-section { padding: 5rem 2rem; background: rgba(26,26,46,0.5); }
         .tech-grid {
             max-width: 800px;
             margin: 0 auto;
@@ -145,16 +130,9 @@
             padding: 1.25rem;
             text-align: center;
         }
-        .tech-item strong {
-            color: #00E5FF;
-            display: block;
-            margin-bottom: 0.25rem;
-        }
+        .tech-item strong { color: #00E5FF; display: block; margin-bottom: 0.25rem; }
         .tech-item span { color: #B3FFFFFF; font-size: 0.9rem; }
-        .stats-section {
-            padding: 5rem 2rem;
-            text-align: center;
-        }
+        .stats-section { padding: 5rem 2rem; text-align: center; }
         .stats-grid {
             max-width: 800px;
             margin: 0 auto;
@@ -171,23 +149,17 @@
             background-clip: text;
         }
         .stat-label { color: #B3FFFFFF; font-size: 0.9rem; margin-top: 0.25rem; }
-        .screenshots {
-            padding: 5rem 2rem;
-            text-align: center;
+        .changelog { padding: 5rem 2rem; max-width: 800px; margin: 0 auto; }
+        .changelog-item {
+            background: rgba(30,30,48,0.6);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
         }
-        .screenshot-placeholder {
-            max-width: 300px;
-            margin: 0 auto;
-            aspect-ratio: 9/16;
-            background: linear-gradient(135deg, #1E1E30, #2A2A40);
-            border-radius: 24px;
-            border: 2px solid rgba(0,229,255,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #66FFFFFF;
-            font-size: 1.2rem;
-        }
+        .changelog-item h3 { color: #00E5FF; font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .changelog-item ul { padding-left: 1.2rem; color: #B3FFFFFF; font-size: 0.95rem; }
+        .changelog-item li { margin-bottom: 0.3rem; }
         footer {
             padding: 2rem;
             text-align: center;
@@ -196,9 +168,11 @@
             font-size: 0.9rem;
         }
         footer a { color: #00E5FF; text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
         @media (max-width: 600px) {
             .logo { font-size: 2.5rem; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -206,12 +180,13 @@
     <section class="hero">
         <div class="hero-content">
             <h1 class="logo">XOLERIC</h1>
-            <p class="tagline">Premium Offline Music Player</p>
-            <p class="subtitle">Your music stays yours. No ads. No tracking. Pure audio experience.</p>
-            <a href="https://github.com/xolerc/xoleric-music/releases/download/v1.0.1/XOLERIC-v1.0.1-release.apk" class="download-btn">
+            <p class="tagline">Music Player & Download Manager</p>
+            <p class="subtitle">Your music stays yours. No ads. No tracking. Pure audio experience with built-in download manager.</p>
+            <a href="https://github.com/xolerc/xoleric-music/releases/download/flutter-v1.0.0/XOLERIC-Flutter-v1.0.0.apk" class="download-btn">
                 Download APK
-                <span class="version">v1.0.1 &middot; Android 7.0+</span>
+                <span class="version">v1.0.0 Flutter &middot; 55.2MB &middot; Android 7.0+</span>
             </a>
+            <div class="badge">Rewritten in Flutter</div>
         </div>
     </section>
 
@@ -221,32 +196,42 @@
             <div class="feature-card">
                 <div class="feature-icon">&#127925;</div>
                 <h3>Background Playback</h3>
-                <p>Full MediaSession integration with notification controls, lock screen support, and seamless background playback.</p>
+                <p>Full audio playback with just_audio engine, notification controls, and lock screen support.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#127760;</div>
                 <h3>Dark Glassmorphism UI</h3>
-                <p>Stunning dark theme with glassmorphism cards and customizable neon accent colors.</p>
+                <p>Material 3 dark theme with glassmorphism cards and customizable neon accent colors.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">&#128203;</div>
-                <h3>Smart Playlists</h3>
-                <p>Recently Played, Most Played, Favorites, and Never Played playlists auto-generated from your listening habits.</p>
+                <div class="feature-icon">&#128229;</div>
+                <h3>Download Manager</h3>
+                <p>Built-in download engine with pause, resume, cancel. Download music, videos, and images from URLs.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#128269;</div>
-                <h3>Powerful Search</h3>
-                <p>Search across songs, artists, albums, and genres with instant results.</p>
+                <h3>Smart Search</h3>
+                <p>Instant search across songs, artists, albums with real-time filtering.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#128203;</div>
+                <h3>Playlists</h3>
+                <p>Create, manage, and organize custom playlists. Persistent storage across sessions.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">&#128171;</div>
-                <h3>Multi-Queue</h3>
-                <p>Manage your queue with add to queue, play next, and drag-to-reorder support.</p>
+                <h3>Queue Management</h3>
+                <p>Drag-to-reorder queue, play next, add to queue with full control.</p>
             </div>
             <div class="feature-card">
-                <div class="feature-icon">&#9201;</div>
-                <h3>Sleep Timer</h3>
-                <p>Set a sleep timer by minutes or until end of current song. Perfect for bedtime listening.</p>
+                <div class="feature-icon">&#10084;</div>
+                <h3>Favorites</h3>
+                <p>Quick-access favorites with persistent storage.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">&#127926;</div>
+                <h3>Lyrics</h3>
+                <p>Dedicated lyrics screen for your songs.</p>
             </div>
         </div>
     </section>
@@ -254,34 +239,52 @@
     <section class="tech-section">
         <h2 class="section-title">Tech Stack</h2>
         <div class="tech-grid">
-            <div class="tech-item"><strong>Kotlin</strong><span>Language</span></div>
-            <div class="tech-item"><strong>Jetpack Compose</strong><span>UI Framework</span></div>
-            <div class="tech-item"><strong>Media3/ExoPlayer</strong><span>Playback Engine</span></div>
-            <div class="tech-item"><strong>Material3</strong><span>Design System</span></div>
-            <div class="tech-item"><strong>Room</strong><span>Database</span></div>
-            <div class="tech-item"><strong>DataStore</strong><span>Preferences</span></div>
-            <div class="tech-item"><strong>Coil</strong><span>Image Loading</span></div>
-            <div class="tech-item"><strong>MVVM</strong><span>Architecture</span></div>
+            <div class="tech-item"><strong>Flutter</strong><span>Cross-platform UI</span></div>
+            <div class="tech-item"><strong>Dart</strong><span>Language</span></div>
+            <div class="tech-item"><strong>just_audio</strong><span>Audio Engine</span></div>
+            <div class="tech-item"><strong>on_audio_query</strong><span>Media Library</span></div>
+            <div class="tech-item"><strong>Provider</strong><span>State Management</span></div>
+            <div class="tech-item"><strong>GoRouter</strong><span>Navigation</span></div>
+            <div class="tech-item"><strong>Dio</strong><span>Download Engine</span></div>
+            <div class="tech-item"><strong>Material 3</strong><span>Design System</span></div>
         </div>
     </section>
 
     <section class="stats-section">
         <h2 class="section-title">By the Numbers</h2>
         <div class="stats-grid">
-            <div><div class="stat-number">85</div><div class="stat-label">Source Files</div></div>
-            <div><div class="stat-number">5.4K</div><div class="stat-label">Lines of Code</div></div>
-            <div><div class="stat-number">20+</div><div class="stat-label">Screens</div></div>
-            <div><div class="stat-number">3.7</div><div class="stat-label">MB APK Size</div></div>
+            <div><div class="stat-number">30+</div><div class="stat-label">Dart Files</div></div>
+            <div><div class="stat-number">4.8K</div><div class="stat-label">Lines of Code</div></div>
+            <div><div class="stat-number">15+</div><div class="stat-label">Screens</div></div>
+            <div><div class="stat-number">55.2</div><div class="stat-label">MB APK Size</div></div>
         </div>
     </section>
 
-    <section class="screenshots">
-        <h2 class="section-title">Screenshots</h2>
-        <div class="screenshot-placeholder">Coming Soon</div>
+    <section class="changelog">
+        <h2 class="section-title">Changelog</h2>
+        <div class="changelog-item">
+            <h3>v1.0.0 Flutter &mdash; July 2026</h3>
+            <ul>
+                <li>Complete rewrite from Kotlin/Compose to Flutter/Dart</li>
+                <li>New download manager with Dio engine</li>
+                <li>Material 3 dark glassmorphism UI</li>
+                <li>Provider state management</li>
+                <li>GoRouter navigation system</li>
+                <li>55.2MB release APK</li>
+            </ul>
+        </div>
+        <div class="changelog-item">
+            <h3>v1.0.1 Kotlin &mdash; Previous</h3>
+            <ul>
+                <li>Bug fixes for MediaSession, navigation, sleep timer</li>
+                <li>Boot receiver, theme accent color fixes</li>
+                <li>3.7MB release APK</li>
+            </ul>
+        </div>
     </section>
 
     <footer>
-        <p>XOLERIC &copy; 2025 &middot; Built with Kotlin + Jetpack Compose</p>
+        <p>XOLERIC &copy; 2026 &middot; Built with Flutter + Dart</p>
         <p style="margin-top: 0.5rem;"><a href="https://github.com/xolerc/xoleric-music">Source Code</a> &middot; <a href="https://github.com/xolerc/xoleric-music/releases">Releases</a></p>
     </footer>
 </body>
