@@ -1,24 +1,25 @@
-# Build outputs
-*.apk
-*.aab
+# Flutter
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Android
+android/.gradle/
+android/local.properties
+android/app/debug/
+android/app/profile/
+android/app/release/
+android/key.properties
 *.jks
 *.keystore
-app/build/
-build/
 
 # IDE
 .idea/
 *.iml
-local.properties
+.vscode/
 
 # OS
 .DS_Store
 Thumbs.db
-
-# Gradle
-.gradle/
-gradle/wrapper/gradle-wrapper.jar
-
-# Generated
-/app/xoleric-release.jks
-/app/src/main/res/values/secrets.xml

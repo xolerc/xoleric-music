@@ -1,0 +1,43 @@
+name: xoleric_music
+description: XOLERIC - Professional Music Player & Download Manager
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # Audio
+  just_audio: ^0.9.43
+  on_audio_query: ^2.9.0
+
+  # State
+  provider: ^6.1.5
+
+  # Navigation
+  go_router: ^17.5.0
+
+  # Storage
+  shared_preferences: ^2.5.3
+
+  # Download
+  dio: ^5.7.0
+  path_provider: ^2.1.6
+
+  # Utils
+  intl: ^0.20.2
+  collection: ^1.19.1
+  uuid: ^4.5.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
