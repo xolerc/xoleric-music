@@ -182,9 +182,9 @@
             <h1 class="logo">XOLERIC</h1>
             <p class="tagline">Music Player & Download Manager</p>
             <p class="subtitle">Your music stays yours. No ads. No tracking. Pure audio experience with built-in download manager.</p>
-            <a href="https://github.com/xolerc/xoleric-music/releases/download/flutter-v1.0.0/XOLERIC-Flutter-v1.0.0.apk" class="download-btn">
+            <a href="https://github.com/xolerc/xoleric-music/releases/download/flutter-v1.0.1/XOLERIC-Flutter-v1.0.1.apk" class="download-btn">
                 Download APK
-                <span class="version">v1.0.0 Flutter &middot; 55.2MB &middot; Android 7.0+</span>
+                <span class="version">v1.0.1 Flutter &middot; 60MB &middot; Android 7.0+</span>
             </a>
             <div class="badge">Rewritten in Flutter</div>
         </div>
@@ -263,14 +263,14 @@
     <section class="changelog">
         <h2 class="section-title">Changelog</h2>
         <div class="changelog-item">
-            <h3>v1.0.0 Flutter &mdash; July 2026</h3>
+            <h3>v1.0.1 Flutter &mdash; August 2026</h3>
             <ul>
-                <li>Complete rewrite from Kotlin/Compose to Flutter/Dart</li>
-                <li>New download manager with Dio engine</li>
-                <li>Material 3 dark glassmorphism UI</li>
-                <li>Provider state management</li>
-                <li>GoRouter navigation system</li>
-                <li>55.2MB release APK</li>
+                <li>Fixed: missing permissions (READ_MEDIA_AUDIO, INTERNET, FOREGROUND_SERVICE)</li>
+                <li>Fixed: crash on startup with error handling</li>
+                <li>Fixed: release APK signing (v2 signature)</li>
+                <li>Added: permission_handler for runtime permissions</li>
+                <li>Reduced Gradle memory to 2GB for low-RAM systems</li>
+                <li>60MB release APK</li>
             </ul>
         </div>
         <div class="changelog-item">
